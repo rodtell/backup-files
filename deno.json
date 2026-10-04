@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "lib": ["dom", "dom.iterable", "deno.ns", "esnext"],
+        "checkJs": true,
+        "strict": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "react"
+    },
+    "imports": {
+        "react": "npm:react@latest",
+        "react-dom": "npm:react-dom@latest",
+        "react-dom/client": "npm:react-dom@latest/client"
+    },
+    "lint": {
+        "enable": false
+    }
+}
