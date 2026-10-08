@@ -1,17 +1,24 @@
 {
-    "compilerOptions": {
-        "lib": ["dom", "dom.iterable", "deno.ns", "esnext"],
-        "checkJs": true,
-        "strict": true,
-        "jsx": "react-jsx",
-        "jsxImportSource": "react"
-    },
-    "imports": {
-        "react": "npm:react@latest",
-        "react-dom": "npm:react-dom@latest",
-        "react-dom/client": "npm:react-dom@latest/client"
-    },
-    "lint": {
-        "enable": false
-    }
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "deno.ns", "esnext"],
+    "checkJs": true,
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "imports": {
+    "@nestjs/common": "npm:@nestjs/common@latest",
+    "@nestjs/core": "npm:@nestjs/core@latest",
+    "next": "npm:next@latest",
+    "react": "npm:react@latest",
+    "react-dom": "npm:react-dom@latest",
+    "react-dom/client": "npm:react-dom@latest/client",
+    "reflect-metadata": "npm:reflect-metadata@latest",
+    "rxjs": "npm:rxjs@latest"
+  },
+  "lint": {
+    "enable": false
+  }
 }
