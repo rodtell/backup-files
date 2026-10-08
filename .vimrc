@@ -16,6 +16,7 @@ set undolevels=2000
 set backspace=indent,eol,start
 filetype plugin indent on
 syntax on
+syntax sync minlines=200 maxlines=500
 set swapfile
 set directory=$HOME/.vim/swap//
 set backup
