@@ -227,25 +227,41 @@ augroup END
 
 # OXFMT
 def FormatOxfmt()
+  var buf = bufnr('%')
+  var filepath = expand('%:p')
+  var tmpfile = tempname()
   var save_cursor = getcurpos()
   var save_view = winsaveview()
-  var lines = getline(1, '$')
-  var filepath = expand('%:p')
-  var cmd = ['oxfmt', '--stdin-filepath=' .. (filepath != '' ? filepath : 'buffer.js')]
-  var result = systemlist(cmd, lines)
-
-  if v:shell_error != 0
-    echohl ErrorMsg
-    echomsg "oxfmt failed: " .. join(result, " ")
-    echohl None
-    return
-  endif
-
-  setline(1, result)
-  winrestview(save_view)
-  setpos('.', save_cursor)
-
-  echomsg "oxfmt success: File formatted."
+  writefile(getline(1, '$'), tmpfile)
+  var stdout_lines = []
+  var stderr_lines = []
+  var job = job_start(['oxfmt', '--stdin-filepath=' .. (filepath != '' ? filepath : 'buffer.js')], {
+    in_io: 'file',
+    in_name: tmpfile,
+    out_io: 'pipe',
+    out_cb: (ch, msg) => add(stdout_lines, msg),
+    err_io: 'pipe',
+    err_cb: (ch, msg) => add(stderr_lines, msg),
+    exit_cb: (j, status) => {
+      if filereadable(tmpfile)
+        delete(tmpfile)
+      endif
+      if bufnr('%') != buf
+        return
+      endif
+      if status == 0
+        setline(1, stdout_lines)
+        winrestview(save_view)
+        setpos('.', save_cursor)
+        doautocmd TextChanged
+        echomsg "oxfmt success: File formatted."
+      else
+        echohl ErrorMsg
+        var err_msg = !empty(stderr_lines) ? join(stderr_lines, " ") : "Unknown error"
+        echomsg "oxfmt failed: " .. err_msg
+        echohl None
+      endif
+    }
+  })
 enddef
-
 nnoremap <silent> <leader>fo <scriptcmd>FormatOxfmt()<CR>
