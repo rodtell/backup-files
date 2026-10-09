@@ -30,7 +30,7 @@ set termguicolors
 set updatetime=500
 set signcolumn=yes
 set cursorline
-set foldmethod=indent
+set foldmethod=manual
 
 # AUTO-SAVE
 augroup AutoSaveGroup
