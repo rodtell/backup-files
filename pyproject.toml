@@ -1,0 +1,27 @@
+[project]
+name = "my-python-project"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.basedpyright]
+typeCheckingMode = "standard"
+reportUnusedImport = "none"
+reportUnusedVariable = "none"
+reportUnusedFunction = "none"
+reportDuplicateImport = "none"
+reportPrivateImportUsage = "none"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["F821", "F822", "E501", "COM812", "ISC001"]
+
+[tool.ruff.format]
+preview = true
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

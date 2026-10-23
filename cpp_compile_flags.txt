@@ -1,0 +1,13 @@
+-std=c++20
+
+-Wall
+-Wextra
+-Wpedantic
+-O2
+
+-Iinclude/
+-Isrc/
+
+-DDEBUG_MODE
+
+-xc++
